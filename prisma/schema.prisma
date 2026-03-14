@@ -1,0 +1,33 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Qarzdor {
+  id          Int      @id @default(autoincrement())
+  kim         String   // Ism familya va yil: "Olimov Botir 1990"
+  umumiyQarz  Float    // Jami qarz miqdori
+  tolangan    Float    @default(0) // To'langan miqdor
+  qoliqQarz   Float    // Qoliq qarz (umumiyQarz - tolangan)
+  status      String   @default("QARZDOR") // QARZDOR | TOLANDI
+  izoh        String?  // Ixtiyoriy izoh
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tolovlar Tolov[] // Bir qarzdorning barcha to'lovlari
+}
+
+model Tolov {
+  id        Int      @id @default(autoincrement())
+  miqdor    Float    // To'langan summa
+  sana      DateTime @default(now())
+  izoh      String?
+
+  qarzdorId Int
+  qarzdor   Qarzdor  @relation(fields: [qarzdorId], references: [id], onDelete: Cascade)
+}
