@@ -30,4 +30,10 @@ model Tolov {
 
   qarzdorId Int
   qarzdor   Qarzdor  @relation(fields: [qarzdorId], references: [id], onDelete: Cascade)
+} 
+model AccessCode {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
 }
