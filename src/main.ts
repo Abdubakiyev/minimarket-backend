@@ -16,7 +16,7 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: ['https://minimarket-henna.vercel.app', 'https://minimarket-henna.vercel.app/'],
+    origin: ['https://minimarket-ten.vercel.app/', 'https://minimarket-ten.vercel.app'],
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type'],
   });
